@@ -19,18 +19,18 @@ public class WolfAI : MonoBehaviour {
 //target is chicken
 	
 
-	void OnTriggerStay(Collider other){
-		if(other.gameObject.name == "Player"){
-			Debug.Log("Player has entered wolfs trigger");
-			transform.LookAt(enemy);
-			transform.Translate(Vector3.forward*speed*Time.deltaTime);
-		}
-		if(other.gameObject.name == "Chicken"){
-			Debug.Log("Chicken has entered wolfs trigger");
-			transform.LookAt(target);
-			transform.Translate(Vector3.forward*speed*Time.deltaTime);
-		}
-	}
+	// void OnTriggerStay(Collider other){
+	// 	if(other.gameObject.name == "Player"){
+	// 		Debug.Log("Player has entered wolfs trigger");
+	// 		transform.LookAt(enemy);
+	// 		transform.Translate(Vector3.forward*speed*Time.deltaTime);
+	// 	}
+	// 	if(other.gameObject.name == "Chicken"){
+	// 		Debug.Log("Chicken has entered wolfs trigger");
+	// 		transform.LookAt(target);
+	// 		transform.Translate(Vector3.forward*speed*Time.deltaTime);
+	// 	}
+	// }
 	
 
 

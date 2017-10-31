@@ -10,7 +10,7 @@ public class PlayerMove : MonoBehaviour {
 
 	public float jumpHeight;
 
-	public float strafeSpeed;
+	
 
 	void Start () {
 		
@@ -21,7 +21,7 @@ public class PlayerMove : MonoBehaviour {
 		var j = Input.GetAxis("Jump")* Time.deltaTime * jumpHeight;
 		var y = Input.GetAxis("Horizontal")* Time.deltaTime * turnSpeed;
 		var z = Input.GetAxis("Vertical")* Time.deltaTime * moveSpeed;
-		var x = Input.GetAxis("Strafe")* Time.deltaTime * strafeSpeed;
+		var x = Input.GetAxis("Strafe")* Time.deltaTime * moveSpeed;
 
 		transform.Rotate(0,y,0);
 		transform.Translate(0,0,z);

@@ -7,6 +7,8 @@ public class ChickenAI : MonoBehaviour {
 	public float speed = 5;
 	public float directionChangeInterval = 1;
 	public float maxHeadingChange = 30;
+	
+	public int points = 10;
 
 	CharacterController controller;
 	float heading;
@@ -18,20 +20,21 @@ public class ChickenAI : MonoBehaviour {
 
 	public Transform chickenPen;
 
-	void OnTriggerStay(Collider other){
-		if(other.gameObject.name == "Player"){
-			Debug.Log("Player has entered chickens trigger");
-			transform.LookAt(target);
-			transform.Translate(Vector3.back*speed*Time.deltaTime);
-		}
-		if(other.gameObject.name == "Wolf"){
-			Debug.Log("Wolf has entered chickens trigger");
-			transform.LookAt(enemy);
-			transform.Translate(Vector3.back*speed*Time.deltaTime);
-		}
-	}
+	// void OnTriggerStay(Collider other){
+	// 	if(other.gameObject.name == "Player"){
+	// 		Debug.Log("Player has entered chickens trigger");
+	// 		transform.LookAt(target);
+	// 		transform.Translate(Vector3.back*speed*Time.deltaTime);
+	// 	}
+	// 	if(other.gameObject.name == "Wolf"){
+	// 		Debug.Log("Wolf has entered chickens trigger");
+	// 		transform.LookAt(enemy);
+	// 		transform.Translate(Vector3.back*speed*Time.deltaTime);
+	// 	}
+	// }
 	void OnCollisionEnter(Collision other){
 		if(other.gameObject.name == "Player"){
+			ScoreManager.AddPoints(points);
 			transform.position = chickenPen.position;
 			transform.rotation = chickenPen.rotation;
 		}
