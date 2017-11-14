@@ -6,7 +6,7 @@ public class WanderIC : MonoBehaviour {
 
 	public float moveSpeed = 5;
 	public Transform chickenPen;
-
+	public Transform chickenGraveYard;
 	void MoveForward(){
 		transform.Translate(Vector3.forward*moveSpeed*Time.deltaTime);
 	}
@@ -33,17 +33,17 @@ public class WanderIC : MonoBehaviour {
 	}
 	void OnCollisionEnter(Collision other){
 		if(other.gameObject.tag == "Player"){
-			ScoreManager.AddPoints(points);
+			// ScoreManager.AddPoints(points);
 			transform.position = chickenPen.position;
 			transform.rotation = chickenPen.rotation;
 		}
 		else if(other.gameObject.tag == "wolf"){
 			//need to add something here to remove points.
-			tranform.position = chickenGraveYard.position;
-			tranform.rotation = chickenGraveYard.rotation;
+			transform.position = chickenGraveYard.position;
+			transform.rotation = chickenGraveYard.rotation;
 		}
 		else{
-			Moveforward();
+			MoveForward();
 		}
 		
 	}

@@ -3,60 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WolfAI : MonoBehaviour {
-
-	public float speed = 5;
-	public float directionChangeInterval = 1;
-	public float maxHeadingChange = 30;
-
-	CharacterController controller;
-	float heading;
-	Vector3 targetRotation;
-	
-	public Transform enemy;
-	//enemy is player
-	
+	public float speed;
 	public Transform target;
+	public Transform enemy;
+	public int damage;
+	public GameObject pcHealth;
+
+	//enemy is player
+
+
+void OnCollisionEnter(Collision other){
+
+	if(other.gameObject.name == "Player"){
+
+	var hit = other.gameObject;
+	var health = hit.GetComponent<PlayerHealth>();
+	print("Wolf is attacking!");
+
+	if(pcHealth!= null){
+		pcHealth.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
+		// health.TakeDamage(damage);
+		}
+	}
+}
 //target is chicken
 	
 
-	// void OnTriggerStay(Collider other){
-	// 	if(other.gameObject.name == "Player"){
-	// 		Debug.Log("Player has entered wolfs trigger");
-	// 		transform.LookAt(enemy);
-	// 		transform.Translate(Vector3.forward*speed*Time.deltaTime);
-	// 	}
-	// 	if(other.gameObject.name == "Chicken"){
-	// 		Debug.Log("Chicken has entered wolfs trigger");
-	// 		transform.LookAt(target);
-	// 		transform.Translate(Vector3.forward*speed*Time.deltaTime);
-	// 	}
-	// }
-	
-
-
-	void Awake (){
-		controller = GetComponent<CharacterController>();
-
-		heading = Random.Range(0,360);
-		transform.eulerAngles = new Vector3(0, heading, 0);
-
-		StartCoroutine(NewHeading());
-	}
-	void Update (){
-		transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, targetRotation, Time.deltaTime * directionChangeInterval);
-		var forward = transform.TransformDirection(Vector3.forward);
-		controller.SimpleMove(forward * speed);
-	}
-	IEnumerator NewHeading (){
-		while (true) {
-			NewHeadingRoutine();
-			yield return new WaitForSeconds(directionChangeInterval);
+	void OnTriggerStay(Collider other){
+		if(other.gameObject.tag == "Player"){
+			Debug.Log("Player has entered wolfs trigger");
+			transform.LookAt(enemy);
+			transform.Translate(Vector3.forward*speed*Time.deltaTime);
+		}
+		if(other.gameObject.tag == "Chicken"){
+			Debug.Log("Chicken has entered wolfs trigger");
+			transform.LookAt(target);
+			transform.Translate(Vector3.forward*speed*Time.deltaTime);
 		}
 	}
-	void NewHeadingRoutine(){
-		var floor = Mathf.Clamp(heading - maxHeadingChange, 0, 360);
-		var ceil = Mathf.Clamp(heading + maxHeadingChange, 0, 360);
-		heading = Random.Range(floor, ceil);
-		targetRotation = new Vector3(0, heading, 0);
-	}
+	
 }
