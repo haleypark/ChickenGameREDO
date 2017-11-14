@@ -6,6 +6,9 @@ TagManager:
   tags:
   - wall
   - CheckPoint
+  - wolf
+  - chickenPen
+  - chickenGraveYard
   layers:
   - Default
   - TransparentFX
