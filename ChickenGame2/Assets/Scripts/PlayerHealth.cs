@@ -1,16 +1,24 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+	public const int maxHealth = 10;
+	public int currentHealth = maxHealth;
+	public Text hp;
+	public Text maxHP;
+
+void Update (){
+	hp.text = currentHealth.ToString();
+	maxHP.text = maxHealth.ToString();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+public void TakeDamage(int amount){
+	currentHealth -= amount;
+	if(currentHealth <= 0){
+		currentHealth=0;
+		print("You're Dead! Game Over");
 	}
+}	
+
 }

@@ -7,9 +7,12 @@ public class WanderIC : MonoBehaviour {
 	public float moveSpeed = 5;
 	public Transform chickenPen;
 	public Transform chickenGraveYard;
+	public int points = 10; 
+
 	void MoveForward(){
 		transform.Translate(Vector3.forward*moveSpeed*Time.deltaTime);
 	}
+
 	void Turn(){
 		int randomNum = Random.Range(0,360);
 		transform.Rotate(0,randomNum,0);
@@ -33,7 +36,7 @@ public class WanderIC : MonoBehaviour {
 	}
 	void OnCollisionEnter(Collision other){
 		if(other.gameObject.tag == "Player"){
-			// ScoreManager.AddPoints(points);
+			ScoreManager.AddPoints(points);
 			transform.position = chickenPen.position;
 			transform.rotation = chickenPen.rotation;
 		}
@@ -42,9 +45,9 @@ public class WanderIC : MonoBehaviour {
 			transform.position = chickenGraveYard.position;
 			transform.rotation = chickenGraveYard.rotation;
 		}
-		else{
-			MoveForward();
-		}
+		// else{
+		// 	Moveforward();
+		// }
 		
 	}
 }
