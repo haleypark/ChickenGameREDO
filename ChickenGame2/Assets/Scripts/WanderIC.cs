@@ -22,7 +22,7 @@ public class WanderIC : MonoBehaviour {
 		if(other.gameObject.tag == "CheckPoint"){
 			Turn();
 		}
-		if(other.gameObject.name == "Player"){
+		else if(other.gameObject.tag == "Player"){
 			transform.LookAt(target);
 			transform.rotation = Quaternion.Inverse (target.rotation); 
 			transform.Translate(Vector3.forward*speed*Time.deltaTime);
