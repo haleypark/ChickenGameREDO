@@ -14,7 +14,7 @@ void MoveForward(){
 }
 
 void Turn(){
-	int randomNum = Random.Range(0,360);
+	int randomNum = Random.Range(180,360);
 	transform.Rotate(0,randomNum,0);
 }
 
@@ -22,18 +22,18 @@ void OnTriggerStay(Collider other){
 	if(other.gameObject.tag == "CheckPoint"){
 		Turn();
 	}
-		if(other.gameObject.tag == "Player"){
+	if(other.gameObject.tag == "Player"){
 			
-			print("The wolf sees you.");
-			transform.LookAt(enemy);
-			transform.Translate(Vector3.forward*speed*Time.deltaTime);
-		}
-		if(other.gameObject.tag == "Chicken"){
+		print("The wolf sees you.");
+		transform.LookAt(enemy);
+		transform.Translate(Vector3.forward*speed*Time.deltaTime);
+	}
+	if(other.gameObject.tag == "Chicken"){
 			
-			print("The wolf as found a chicken!");
-			transform.LookAt(target);
-			transform.Translate(Vector3.forward*speed*Time.deltaTime);
-		}
+		print("The wolf as found a chicken!");
+		transform.LookAt(target);
+		transform.Translate(Vector3.forward*speed*Time.deltaTime);
+	}
 	else{
 		MoveForward();
 	}
@@ -42,11 +42,10 @@ void OnTriggerStay(Collider other){
 
 void OnTriggerEnter(Collider other){
 	if(other.gameObject.tag == "wall"){
-		transform.Rotate(0,180,0);
+		
+		transform.Rotate(0,160,0);
 	}
-	else{
-		MoveForward();
-	}
+	
 }
 void OnCollisionEnter(Collision other){
 

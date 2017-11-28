@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class WanderIC : MonoBehaviour {
 
-	public float moveSpeed = 5;
+	public float speed = 5;
 	public Transform chickenPen;
 	public Transform chickenGraveYard;
-	public int points = 10; 
+	public int points = 10;
+	public Transform target;
 
 	void MoveForward(){
-		transform.Translate(Vector3.forward*moveSpeed*Time.deltaTime);
+		transform.Translate(Vector3.forward*speed*Time.deltaTime);
 	}
 
 	void Turn(){
@@ -21,6 +22,12 @@ public class WanderIC : MonoBehaviour {
 		if(other.gameObject.tag == "CheckPoint"){
 			Turn();
 		}
+		if(other.gameObject.name == "Player"){
+			transform.LookAt(target);
+			transform.rotation = Quaternion.Inverse (target.rotation); 
+			transform.Translate(Vector3.forward*speed*Time.deltaTime);
+			
+		}
 		else{
 			MoveForward();
 		}
@@ -30,9 +37,7 @@ public class WanderIC : MonoBehaviour {
 		if(other.gameObject.tag == "wall"){
 			transform.Rotate(0,180,0);
 		}
-		else{
-			MoveForward();
-		}
+		
 	}
 	void OnCollisionEnter(Collision other){
 		if(other.gameObject.tag == "Player"){
@@ -40,14 +45,11 @@ public class WanderIC : MonoBehaviour {
 			transform.position = chickenPen.position;
 			transform.rotation = chickenPen.rotation;
 		}
-		else if(other.gameObject.tag == "wolf"){
+		if(other.gameObject.tag == "wolf"){
 			//need to add something here to remove points.
 			transform.position = chickenGraveYard.position;
 			transform.rotation = chickenGraveYard.rotation;
 		}
-		// else{
-		// 	Moveforward();
-		// }
-		
+	
 	}
 }
